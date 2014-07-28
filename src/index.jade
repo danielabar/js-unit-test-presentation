@@ -79,12 +79,39 @@ html
         blockquote(cite="http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd") Why don't we clean up code that we know is messy? We're afraid we'll break it. But if we have the tests, we can be reasonably sure that the code is not broken, or that we'll detect the breakage immediately. If we have the tests we become fearless about making changes. If we see messy code, or an unclean structure, we can clean it without fear. Because of the tests, the code becomes malleable again. Because of the tests, software becomes soft again.
 
       section
-        h2 JavaScript specific testing challenges
-          ul
-            li
-            li What are the units?
-            li Asynchronous
-            li DOM Manipulation
+        h2 JavaScript unit testing challenges
+        ul
+          li
+          li What are the units?
+          li How to test asynchronous execution?
+          li How to test DOM manipulation
+
+      section
+        h2 Testable Units
+        pre
+          code.language-javascript.
+            $('button').click(function() {
+              var query = $('input').text();
+              if (query && query.length > 2) {
+                $.ajax(url: 'http://content.guardianapis.com/search?show-fields=all&q=' + query, success: function(data) {
+                  var items = data.response.results;
+                  for (i=0; i<items; i++) {
+                    $('table').append('<tr>')
+                    $('table').append('<td>' + item.fields.byline + '</tr>')  // author
+                    $('table').append('<td>' + item.fields.trailText + '</tr>')  // content
+                    $('table').append('<td>' + item.fields.thumbnail + '</tr>')  // thumbnail
+                    $('table').append('<td>' + item.fields.webUrl + '</tr>')  // url
+                    $('table').append('<td>' + item.fields.webTitle + '</tr>')  // title
+                    $('table').append('<td>' + item.fields.webPublicationDate + '</tr>')  // publishDate
+                    $('table').append('</tr>')
+                  }
+                }, error: function(jqXHR, textStatus, errorThrown) {
+                  $('.errorBox').text(textStatus + ', ' + errorThrown);
+                  $('.errorBox').show();
+                });
+              }
+            });
+        h3 Don't do this
 
       section(data-bespoke-hash='named-route')
         h2 Named Route
