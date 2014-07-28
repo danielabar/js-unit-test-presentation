@@ -268,7 +268,7 @@ pre {
   padding: 26px !important;
   -webkit-border-radius: 8px;
   border-radius: 8px;
-  width: 640px;
+  width: 625px;
 }
 body {
   font-family: helvetica, arial, sans-serif;
@@ -301,6 +301,7 @@ ul {
 }
 li {
   margin-bottom: 12px;
+  font-size: 1.5em;
 }
 p {
   margin: 0 100px 12px;
@@ -312,4 +313,13 @@ a {
 }
 .img-padding {
   padding: 10px;
+}
+.float-left {
+  float: left;
+}
+.sidebar {
+  font-size: 1.8em;
+  width: 84%;
+  margin-top: 26px;
+  color: #6f0102;
 }

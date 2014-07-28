@@ -12,7 +12,20 @@
         <h1>JavaScript Unit Testing</h1><img src="images/dilberttestscript.jpg" width="597">
       </section>
       <section>
-        <h2>Why should we test client side JavaScript?</h2><img src="images/bigquestionmark.png" width="200">
+        <h2>Why should we automate client side testing?</h2>
+        <div class="imagebox"><img src="images/bigquestionmark.png" width="150" class="float-left">
+          <div class="sidebar">Many of the same reasons we test our server side code</div>
+        </div>
+      </section>
+      <section>
+        <h2>Verify expected behaviour</h2>
+        <ul>
+          <li></li>
+          <li>Happy path</li>
+          <li>Error conditions</li>
+          <li>Invalid input</li>
+          <li>Unexpected input</li>
+        </ul>
       </section>
       <section>
         <h2>Prevent regressions</h2><img src="images/gorilla-callout.png" width="500">
@@ -48,13 +61,42 @@ describe('Password Validator', function() {
         <h3>If it's hard to test, that's a code smell</h3>
       </section>
       <section>
-        <h2>Bullet List</h2>
-        <h3 class="bullet">Powered by <a href="https://github.com/markdalgleish/bespoke-bullets">bespoke-bullets</a></h3>
+        <h2>In the words of Uncle Bob...</h2>
+        <blockquote cite="http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd">Why don't we clean up code that we know is messy? We're afraid we'll break it. But if we have the tests, we can be reasonably sure that the code is not broken, or that we'll detect the breakage immediately. If we have the tests we become fearless about making changes. If we see messy code, or an unclean structure, we can clean it without fear. Because of the tests, the code becomes malleable again. Because of the tests, software becomes soft again.</blockquote>
+      </section>
+      <section>
+        <h2>JavaScript unit testing challenges</h2>
         <ul>
-          <li>Bullet 1</li>
-          <li>Bullet 2</li>
-          <li>Bullet 3</li>
+          <li></li>
+          <li>What are the units?</li>
+          <li>How to test asynchronous execution?</li>
+          <li>How to test DOM manipulation</li>
         </ul>
+      </section>
+      <section>
+        <h2>Testable Units</h2>
+        <pre><code class="language-javascript">$('button').click(function() {
+  var query = $('input').text();
+  if (query && query.length > 2) {
+    $.ajax(url: 'http://content.guardianapis.com/search?show-fields=all&q=' + query, success: function(data) {
+      var items = data.response.results;
+      for (i=0; i<items; i++) {
+        $('table').append('<tr>')
+        $('table').append('<td>' + item.fields.byline + '</tr>')  // author
+        $('table').append('<td>' + item.fields.trailText + '</tr>')  // content
+        $('table').append('<td>' + item.fields.thumbnail + '</tr>')  // thumbnail
+        $('table').append('<td>' + item.fields.webUrl + '</tr>')  // url
+        $('table').append('<td>' + item.fields.webTitle + '</tr>')  // title
+        $('table').append('<td>' + item.fields.webPublicationDate + '</tr>')  // publishDate
+        $('table').append('</tr>')
+      }
+    }, error: function(jqXHR, textStatus, errorThrown) {
+      $('.errorBox').text(textStatus + ', ' + errorThrown);
+      $('.errorBox').show();
+    });
+  }
+});</code></pre>
+        <h3>Don't do this</h3>
       </section>
       <section data-bespoke-hash="named-route">
         <h2>Named Route</h2>
@@ -64,19 +106,6 @@ describe('Password Validator', function() {
       <section data-bespoke-state="emphatic">
         <h2>Emphatic Slide!</h2>
         <h3>Powered by <a href="https://github.com/markdalgleish/bespoke-state">bespoke-state</a></h3>
-      </section>
-      <section>
-        <h2 class="bullet">Just the beginning...</h2>
-        <hr>
-        <ul>
-          <li>Edit <a href="http://jade-lang.com/">Jade</a> markup in <em>'src/index.jade'</em></li>
-          <li>Edit <a href="http://learnboost.github.io/stylus/">Stylus</a> styles in <em>'src/styles/main.styl'</em></li>
-          <li>Edit JavaScript in <em>'src/scripts/main.js'</em></li>
-        </ul>
-        <hr>
-        <ul>
-          <li><strong>Enjoy! :)</strong><a href="http://twitter.com/markdalgleish"> -@markdalgleish</a></li>
-        </ul>
       </section>
     </article>
     <script src="scripts/scripts.js"></script>
