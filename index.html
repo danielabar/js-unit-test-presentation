@@ -69,34 +69,115 @@ describe('Password Validator', function() {
         <ul>
           <li></li>
           <li>What are the units?</li>
-          <li>How to test asynchronous execution?</li>
-          <li>How to test DOM manipulation</li>
+          <li>Module dependencies</li>
+          <li>Asynchronous execution?</li>
+          <li>DOM manipulation</li>
         </ul>
       </section>
       <section>
-        <h2>Testable Units</h2>
+        <h2>What are the units?</h2>
         <pre><code class="language-javascript">$('button').click(function() {
   var query = $('input').text();
-  if (query && query.length > 2) {
+  if (query && query.length >= 2) {
     $.ajax(url: 'http://content.guardianapis.com/search?show-fields=all&q=' + query, success: function(data) {
       var items = data.response.results;
-      for (i=0; i<items; i++) {
-        $('table').append('<tr>')
-        $('table').append('<td>' + item.fields.byline + '</tr>')  // author
-        $('table').append('<td>' + item.fields.trailText + '</tr>')  // content
-        $('table').append('<td>' + item.fields.thumbnail + '</tr>')  // thumbnail
-        $('table').append('<td>' + item.fields.webUrl + '</tr>')  // url
-        $('table').append('<td>' + item.fields.webTitle + '</tr>')  // title
-        $('table').append('<td>' + item.fields.webPublicationDate + '</tr>')  // publishDate
-        $('table').append('</tr>')
+      for (i = 0; i < items; i++) {
+        // Only show news items that have pictures
+        if (item.fields.thumbnail) {
+          $('table').append('&lt;tr&gt;')
+          $('table').append('&lt;td&gt;' + item.fields.byline + '&lt;/tr&gt;')  // author
+          $('table').append('&lt;td&gt;' + item.fields.trailText + '&lt;/tr&gt;')  // content
+          $('table').append('&lt;td&gt;' + item.fields.thumbnail + '&lt;/tr&gt;')  // thumbnail
+          $('table').append('&lt;td&gt;' + item.fields.webUrl + '&lt;/tr&gt;')  // url
+          $('table').append('&lt;td&gt;' + item.fields.webTitle + '&lt;/tr&gt;')  // title
+          $('table').append('&lt;td&gt;' + item.fields.webPublicationDate + '&lt;/tr&gt;')  // publishDate
+          $('table').append('&lt;/tr&gt;')
+        }
       }
     }, error: function(jqXHR, textStatus, errorThrown) {
       $('.errorBox').text(textStatus + ', ' + errorThrown);
       $('.errorBox').show();
     });
   }
-});</code></pre>
-        <h3>Don't do this</h3>
+});
+</code></pre>
+      </section>
+      <section>
+        <h2>Use a module system</h2>
+        <h2>Split up logic into functions</h2>
+        <pre><code class="language-javascript">// News Module
+define(['jquery'], function($) {
+  var init = function(config) { // pass in DOM elems, register event handlers },
+  var validate = function(query) { // validation rules implemented here },
+  var getNews = function(query) { // $.ajax... },
+  var shouldBeIncluded = function(item) { // business rules implemented here },
+  var convertItemsForDisplay = function(items) { // if shouldBeIncluded(item) convert ... },
+  var display = function(displayItems, config.outputTarget) { // dom manipulation... }
+  
+  // Expose methods
+  return {
+    init: init,
+    validate: validate,
+    getNews: getNews
+    ...
+  }
+});
+</code></pre>
+      </section>
+      <!-- Maybe this belongs with last slide on references?-->
+      <section>
+        <h2>A stack for JS testing</h2>
+        <ul>
+          <li></li>
+          <li>Mocha Tests: describe... it...</li>
+          <li>Chai Assertions: expect...</li>
+          <li>Karma Runner: Automated runs, multiple browsers, reporters</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Load module in a test</h2>
+        <pre><code class="language-javascript">// News module is the fixture under test
+define(['../news', 'jquery'], function(fixture, $) {
+  // Can call methods of news module,
+  // such as example fixture.init, fixture.validate etc.
+});
+</code></pre>
+      </section>
+      <section>
+        <h2>Test validation</h2>
+        <pre><code class="language-javascript">define(['../news', 'jquery'], function(fixture, $) {
+  describe('validate', function() {
+    it('Does not allow null query', function() {
+      expect(fixture.validate(null)).to.be(false);
+    });
+    it('Does not allow null short query', function() {
+      expect(fixture.validate('a')).to.be(false);
+    });
+    it('Allows query string of 2 characters', function() {
+      expect(fixture.validate('ab')).to.be(true);
+    });
+  });
+});
+</code></pre>
+      </section>
+      <section>
+        <h2>Test list conversion</h2>
+        <pre><code class="language-javascript">describe('convertItemsForDisplay', function() {
+  // Build sample response from API
+  var itemsFromApi = [{}, {}, {}];
+  var result = fixture.convertNewsItemsForDisplay(itemsFromApi);
+  expect(result).to.have.length()
+});
+</code></pre>
+      </section>
+      <!-- Last slide?-->
+      <section>
+        <h2>References</h2>
+        <ul>
+          <li>Mocha</li>
+          <li>Chai</li>
+          <li>Karma</li>
+        </ul>
       </section>
       <section data-bespoke-hash="named-route">
         <h2>Named Route</h2>
