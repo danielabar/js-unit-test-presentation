@@ -18,13 +18,13 @@
         </div>
       </section>
       <section>
-        <h2>Verify expected behaviour</h2>
+        <h2>Verify Expectations</h2>
         <ul>
           <li></li>
-          <li>Happy path<i class="fa fa-thumbs-up"></i></li>
-          <li>Error conditions</li>
-          <li>Invalid input</li>
-          <li>Unexpected input</li>
+          <li>Happy path<i class="fa fa-thumbs-up icon-padding"></i></li>
+          <li>Error conditions<i class="fa fa-thumbs-down icon-padding"></i></li>
+          <li>Invalid input<i class="fa fa-times icon-padding"></i></li>
+          <li>Unexpected input<i class="fa fa-warning icon-padding"></i></li>
         </ul>
       </section>
       <section>
@@ -65,12 +65,11 @@ describe('Password Validator', function() {
         <blockquote cite="http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd">Why don't we clean up code that we know is messy? We're afraid we'll break it. But if we have the tests, we can be reasonably sure that the code is not broken, or that we'll detect the breakage immediately. If we have the tests we become fearless about making changes. If we see messy code, or an unclean structure, we can clean it without fear. Because of the tests, the code becomes malleable again. Because of the tests, software becomes soft again.</blockquote>
       </section>
       <section>
-        <h2>JavaScript unit testing challenges</h2>
+        <h2>JavaScript specific testing challenges</h2>
         <ul>
           <li></li>
           <li>What are the units?</li>
-          <li>Module dependencies</li>
-          <li>Asynchronous execution?</li>
+          <li>Asynchronous execution</li>
           <li>DOM manipulation</li>
         </ul>
       </section>
@@ -78,12 +77,15 @@ describe('Password Validator', function() {
         <h2>What are the units?</h2>
         <pre><code class="language-javascript">$('button').click(function() {
   var query = $('input').text();
+  // Validation rule: only search if we have a query of at least two chars
   if (query && query.length >= 2) {
     $.ajax(url: 'http://content.guardianapis.com/search?show-fields=all&q=' + query, success: function(data) {
       var items = data.response.results;
       for (i = 0; i < items; i++) {
-        // Only show news items that have pictures
+        // Business rule: only show news items that have pictures
         if (item.fields.thumbnail) {
+          // sentiment is a global!
+          sentimentResult = sentiment.analyze(item.fields.trailText);
           $('table').append('&lt;tr&gt;')
           $('table').append('&lt;td&gt;' + item.fields.byline + '&lt;/tr&gt;')  // author
           $('table').append('&lt;td&gt;' + item.fields.trailText + '&lt;/tr&gt;')  // content
@@ -91,6 +93,7 @@ describe('Password Validator', function() {
           $('table').append('&lt;td&gt;' + item.fields.webUrl + '&lt;/tr&gt;')  // url
           $('table').append('&lt;td&gt;' + item.fields.webTitle + '&lt;/tr&gt;')  // title
           $('table').append('&lt;td&gt;' + item.fields.webPublicationDate + '&lt;/tr&gt;')  // publishDate
+          $('table').append('&lt;td&gt;' + sentimentResult + '&lt;/tr&gt;')  // sentiment analysis
           $('table').append('&lt;/tr&gt;')
         }
       }
@@ -104,34 +107,42 @@ describe('Password Validator', function() {
       </section>
       <section>
         <h2>Use a module system</h2>
-        <h2>Split up logic into functions</h2>
         <pre><code class="language-javascript">// News Module
-define(['jquery'], function($) {
-  var init = function(config) { // pass in DOM elems, register event handlers },
-  var validate = function(query) { // validation rules implemented here },
-  var getNews = function(query) { // $.ajax... },
-  var shouldBeIncluded = function(item) { // business rules implemented here },
-  var convertItemsForDisplay = function(items) { // if shouldBeIncluded(item) convert ... },
-  var display = function(displayItems, config.outputTarget) { // dom manipulation... }
-  
+define(['jquery', 'sentiment'], function($, sentiment) {
+  var init = function(config) {
+    // pass in DOM elems, register event handlers
+  },
+  var validate = function(query) {
+    // validation rules implemented here
+  },
+  var load = function(query) {
+    // $.ajax...
+  },
+  var process = function(items) {
+    // for each item, pass content to sentiment analysis
+  },
+  var display = function(displayItems, config.outputTarget) {
+    // dom manipulation...
+  }
   // Expose methods
   return {
     init: init,
     validate: validate,
-    getNews: getNews
-    ...
+    load: load,
+    process: process,
+    display: display
   }
 });
 </code></pre>
       </section>
-      <!-- Maybe this belongs with last slide on references?-->
       <section>
         <h2>A stack for JS testing</h2>
         <ul>
           <li></li>
-          <li>Mocha Tests: describe... it...</li>
-          <li>Chai Assertions: expect...</li>
-          <li>Karma Runner: Automated runs, multiple browsers, reporters</li>
+          <li><a href="http://visionmedia.github.io/mocha/">Mocha test framework</a> describe... it...</li>
+          <li><a href="http://chaijs.com/api/bdd/">Chai Assertion Library</a> expect... to...</li>
+          <li><a href="http://sinonjs.org/docs/">Sinon.JS</a> spies, stubs, and mocks</li>
+          <li><a href="http://karma-runner.github.io/0.12/intro/how-it-works.html">Karma Runner</a> Multiple browsers, reporters</li>
         </ul>
       </section>
       <section>
@@ -161,22 +172,29 @@ define(['../news', 'jquery'], function(fixture, $) {
 </code></pre>
       </section>
       <section>
-        <h2>Test list conversion</h2>
-        <pre><code class="language-javascript">describe('convertItemsForDisplay', function() {
-  // Build sample response from API
-  var itemsFromApi = [{}, {}, {}];
-  var result = fixture.convertNewsItemsForDisplay(itemsFromApi);
-  expect(result).to.have.length()
+        <h2>Mock out dependencies</h2>
+        <pre><code class="language-javascript">define(['../news', '../sentiment'], function(fixture, sentiment) {
+  it('News conversion delegates to sentiment analysis', function() {
+  
+    var sentimentStub = sinon.stub(sentiment, 'analyze');
+    sentimentStub.onCall(0).returns('positive');
+    sentimentStub.onCall(2).returns('negative');
+    
+    var itemsFromApi = [{content: 'foo'}, {content: 'bar'}];
+    var result = fixture.process(itemsFromApi);
+    
+    sinon.assert.calledwith(sentimentStub, 'foo')
+    sinon.assert.calledwith(sentimentStub, 'bar')
+  });
 });
 </code></pre>
       </section>
-      <!-- Last slide?-->
+      <!-- TODO: asynx ajax example - promises-->
+      <!-- TODO: dom manipulation example - karma html2js plugin-->
       <section>
-        <h2>References</h2>
+        <h2>Further References</h2>
         <ul>
-          <li>Mocha</li>
-          <li>Chai</li>
-          <li>Karma</li>
+          <li>TBD...</li>
         </ul>
       </section>
       <section data-bespoke-hash="named-route">
