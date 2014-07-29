@@ -21,7 +21,7 @@
         <h2>Verify expected behaviour</h2>
         <ul>
           <li></li>
-          <li>Happy path</li>
+          <li>Happy path<i class="fa fa-thumbs-up"></i></li>
           <li>Error conditions</li>
           <li>Invalid input</li>
           <li>Unexpected input</li>
@@ -42,12 +42,12 @@ describe('Password Validator', function() {
   it('Rejects short passwords', function() {
     var password = 'foo';
     var result = passwordValidator.isValid(password);
-    expect(result).toBe(false);
+    expect(result).to.be(false);
   });
   it('Accepts password with mixed chars', function() {
     var password = 'abc123*&^%FEG'
     var result = passwordValidator.isValid(password);
-    expect(result).toBe(true);
+    expect(result).to.be(true);
   });
 });
 </code></pre>
