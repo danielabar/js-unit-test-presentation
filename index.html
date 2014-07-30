@@ -189,7 +189,66 @@ define(['../news', 'jquery'], function(fixture, $) {
 });
 </code></pre>
       </section>
-      <!-- TODO: asynx ajax example - promises-->
+      <section>
+        <h2>Asynchronous: Promises</h2>
+        <pre><code class="language-javascript">var load = function(query) {
+  return $.ajax({
+    url: 'http://content.guardianapis.com/search?show-fields=all',
+    data: {
+      q: query
+    }
+  }).promise();
+};
+var process = function(query) {
+  var d = $.Deferred();
+  load(query).then(
+    function (data) {
+      // foreach data item, process
+      d.resolve(processedData);
+    },
+    function(jqXHR, statusText, errorThrown) {
+      // handle error
+      d.reject(statusText + ' ' + errorThrown);
+    }
+  )
+};
+</code></pre>
+      </section>
+      <section>
+        <h2>Mock out async</h2>
+        <pre><code class="language-javascript">it('Process news calls guardian API', function(done) {
+  var ajaxResponse = function() {
+    var d = $.Deferred();
+    d.resolve({news: [{item1, item2, etc.}]});
+    return d.promise();
+  };
+  var ajaxStub = sandbox.stub($, 'ajax');
+  ajaxStub.returns(ajaxResponse());
+  
+  // Verify promise is returned
+  result = fixture.process('election');
+  expect(result.state()).to.equal('resolved');
+  
+  // Verify ajax stub was called with matcher
+  sinon.assert.calledWith(ajaxStub, sinon.match({
+    url: 'http://content.guardianapis.com/search?show-fields=all'
+  }));
+  
+  // Verify processing result
+  result.then(
+    function(data) {
+      // expect(data).to... Verify data contents
+      done();
+    },
+    function(err) {
+      // Should not get here because this is a success test
+      expect(false).to.be(true);
+      done();
+    }
+  );
+});
+</code></pre>
+      </section>
       <!-- TODO: dom manipulation example - karma html2js plugin-->
       <section>
         <h2>Further References</h2>
