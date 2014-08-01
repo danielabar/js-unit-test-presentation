@@ -125,33 +125,15 @@ html
 
       section
         h2 Use a module system
+        h3 Break up logic into small functions, declare dependencies in separate modules
         pre
           code.language-javascript.
             // News Module
             define(['jquery', 'sentiment'], function($, sentiment) {
-              var init = function(config) {
-                // pass in DOM elems, register event handlers
-              },
-              var validate = function(query) {
-                // validation rules implemented here
-              },
-              var load = function(query) {
-                // $.ajax...
-              },
-              var process = function(items) {
-                // for each item, pass content to sentiment analysis
-              },
-              var display = function(displayItems, config.outputTarget) {
-                // dom manipulation...
-              }
-              // Expose methods
-              return {
-                init: init,
-                validate: validate,
-                load: load,
-                process: process,
-                display: display
-              }
+              var init = function(config) { ... },
+              var validate = function(query) { ... },
+              var search = function(query) { ... },
+              var display = function(loadInto, items) { ... }
             });
 
       section
@@ -177,8 +159,11 @@ html
           code.language-javascript.
             // News module is the fixture under test
             define(['../news', 'jquery'], function(fixture, $) {
-              // Can call methods of news module,
-              // such as example fixture.init, fixture.validate etc.
+              describe('News Module', function() {
+                it('Does something', function() {
+                  expect(fixture.someMethod()).to.equal('something');
+                });
+              });
             });
 
       section
@@ -218,69 +203,27 @@ html
         | describe('Search', function()...
 
       section
-        h2 Mock out async
-        pre
-          code.language-javascript.
-            it('Process news calls guardian API', function(done) {
-              var ajaxResponse = function() {
-                var d = $.Deferred();
-                d.resolve({news: [{item1, item2, etc.}]});
-                return d.promise();
-              };
-              var ajaxStub = sandbox.stub($, 'ajax');
-              ajaxStub.returns(ajaxResponse());
-
-              // Verify promise is returned
-              result = fixture.process('election');
-              expect(result.state()).to.equal('resolved');
-
-              // Verify ajax stub was called with matcher
-              sinon.assert.calledWith(ajaxStub, sinon.match({
-                url: 'http://content.guardianapis.com/search?show-fields=all'
-              }));
-
-              // Verify processing result
-              result.then(
-                function(data) {
-                  // expect(data).to... Verify data contents
-                  done();
-                },
-                function(err) {
-                  // Should not get here because this is a success test
-                  expect(false).to.be(true);
-                  done();
-                }
-              );
-            });
+        h2 Demo
+        h3 DOM manipulation with Karma html2js plugin
+        a(href="https://github.com/danielabar/learn-js-test/blob/master/app/scripts/news.js") Source
+        | var display = function(loadInto, displayItems)...
+        a(href="https://github.com/danielabar/learn-js-test/blob/master/test/NewsSpec.js") Spec
+        | describe('Display', function()...
+        a(href="https://github.com/danielabar/learn-js-test/blob/master/test/html/AppSpec.html") HTML snippet
 
       section
-        h2 DOM manipulation
-        pre
-          code.language-javascript.
-            var display = function(displayItems, outputTarget) {
-              var container = $(outputTarget).find('.container');
-              displayItems.forEach(function(item) {
-                // Would probably use a templating system
-                outputTarget.append('&lt;td&gt;' + item.author + '&lt;/td&gt;')
-                outputTarget.append('&lt;td&gt;' + item.content + '&lt;/td&gt;')
-                outputTarget.append('&lt;td&gt;' + item.sentiment + '&lt;/td&gt;')
-              });
-            };
-
-      section
-        h2 Karma html2js plugin
-        pre.language-markup(data-src='NewsSpec.html')
-        pre
-          code.language-javascript.
-            // NewsSpec.js
-            it('Displays news results', function() {
-              document.body.innerHTML = window.__html__['test/html/NewsSpec.html'];
-              var diplayItems = [{author: 'Joe', content: 'twas a dark stormy night'}, {item2}, etc.];
-              var outputTarget = $('#newsTest');
-              fixture.display(diplayItems, outputTarget);
-              var firstRow = $('#newsTest').find('tr').eq(0);
-              expect(firstRow.text()).to.equal('Joe twas a dark stormy night');
-            });
+        h2 Karma goodies
+        ul
+          li
+          li Capture multiple browsers
+            img(src="images/browser-icons.png" width="150")
+          li Test from other devices
+            i.fa.fa-mobile.icon-padding
+            i.fa.fa-tablet.icon-padding
+          li
+            a(href="http://karma-runner.github.io/0.8/config/coverage.html") Coverage reporter
+          li
+            a(href="https://www.npmjs.org/search?q=karma") Many plugins available
 
       section
         h2 Further References
