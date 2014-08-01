@@ -1945,3 +1945,8 @@ a {
 .icon-padding {
   padding-left: 12px;
 }
+blockquote {
+  font-size: 1.4em;
+  font-style: italic;
+  color: #4b4949;
+}
