@@ -1878,11 +1878,16 @@ li.bespoke-bullet-inactive {
 .emphatic .bespoke-slide {
   background: #eaeaea;
 }
-pre {
-  padding: 26px !important;
-  -webkit-border-radius: 8px;
-  border-radius: 8px;
+.bespoke-slide pre {
   width: 625px;
+  padding: 15px !important;
+  -webkit-border-radius: 0.3em;
+  border-radius: 0.3em;
+  border: 0.3em solid #545454;
+/* #282A2B */
+  -webkit-box-shadow: 1px 1px 0.3em #000 inset;
+  box-shadow: 1px 1px 0.3em #000 inset;
+  margin: 0.3em 0;
 }
 body {
   font-family: helvetica, arial, sans-serif;
@@ -1898,13 +1903,13 @@ h1 {
 h2 {
   font-size: 42px;
   letter-spacing: -1px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 h3 {
   font-size: 24px;
   font-weight: normal;
   margin-bottom: 24px;
-  color: #606060;
+  color: #4b4949;
 }
 hr {
   visibility: hidden;
