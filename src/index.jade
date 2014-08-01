@@ -182,23 +182,14 @@ html
             });
 
       section
-        h2 Test validation
-        pre
-          code.language-javascript.
-            define(['../news', 'jquery'], function(fixture, $) {
-              describe('validate', function() {
-                it('Does not allow null query', function() {
-                  expect(fixture.validate(null)).to.be(false);
-                });
-                it('Does not allow null short query', function() {
-                  expect(fixture.validate('a')).to.be(false);
-                });
-                it('Allows query string of 2 characters', function() {
-                  expect(fixture.validate('ab')).to.be(true);
-                });
-              });
-            });
+        h2 Demo
+        h3 Simple function with no dependencies
+        a(href="https://github.com/danielabar/learn-js-test/blob/master/app/scripts/news.js") Source
+        | var validate = function(value)...
+        a(href="https://github.com/danielabar/learn-js-test/blob/master/test/NewsSpec.js") Spec
+        | describe('Validate', function()...
 
+      // TODO Demo
       section
         h2 Mock out dependencies
         pre
@@ -219,30 +210,12 @@ html
             });
 
       section
-        h2 Asynchronous: Promises
-        pre
-          code.language-javascript.
-            var load = function(query) {
-              return $.ajax({
-                url: 'http://content.guardianapis.com/search?show-fields=all',
-                data: {
-                  q: query
-                }
-              }).promise();
-            };
-            var process = function(query) {
-              var d = $.Deferred();
-              load(query).then(
-                function (data) {
-                  // foreach data item, process
-                  d.resolve(processedData);
-                },
-                function(jqXHR, statusText, errorThrown) {
-                  // handle error
-                  d.reject(statusText + ' ' + errorThrown);
-                }
-              )
-            };
+        h2 Demo
+        h3 Async execution with sinon stub and mocha done
+        a(href="https://github.com/danielabar/learn-js-test/blob/master/app/scripts/news.js") Source
+        | var search = function(query)...
+        a(href="https://github.com/danielabar/learn-js-test/blob/master/test/NewsSpec.js") Spec
+        | describe('Search', function()...
 
       section
         h2 Mock out async
@@ -280,21 +253,39 @@ html
               );
             });
 
-      // TODO: dom manipulation example - karma html2js plugin
+      section
+        h2 DOM manipulation
+        pre
+          code.language-javascript.
+            var display = function(displayItems, outputTarget) {
+              var container = $(outputTarget).find('.container');
+              displayItems.forEach(function(item) {
+                // Would probably use a templating system
+                outputTarget.append('&lt;td&gt;' + item.author + '&lt;/td&gt;')
+                outputTarget.append('&lt;td&gt;' + item.content + '&lt;/td&gt;')
+                outputTarget.append('&lt;td&gt;' + item.sentiment + '&lt;/td&gt;')
+              });
+            };
+
+      section
+        h2 Karma html2js plugin
+        pre.language-markup(data-src='NewsSpec.html')
+        pre
+          code.language-javascript.
+            // NewsSpec.js
+            it('Displays news results', function() {
+              document.body.innerHTML = window.__html__['test/html/NewsSpec.html'];
+              var diplayItems = [{author: 'Joe', content: 'twas a dark stormy night'}, {item2}, etc.];
+              var outputTarget = $('#newsTest');
+              fixture.display(diplayItems, outputTarget);
+              var firstRow = $('#newsTest').find('tr').eq(0);
+              expect(firstRow.text()).to.equal('Joe twas a dark stormy night');
+            });
 
       section
         h2 Further References
         ul
           li TBD...
-
-      section(data-bespoke-hash='named-route')
-        h2 Named Route
-        h3 Powered by <a href="https://github.com/markdalgleish/bespoke-hash">bespoke-hash</a>
-        p Look up! This route has been named with a <em>'data-bespoke-hash'</em> attribute.
-
-      section(data-bespoke-state='emphatic')
-        h2 Emphatic Slide!
-        h3 Powered by <a href="https://github.com/markdalgleish/bespoke-state">bespoke-state</a>
 
     // build:js scripts/scripts.js
     script(src='bower_components/bespoke.js/dist/bespoke.min.js')
