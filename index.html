@@ -9,12 +9,17 @@
   <body class="cube">
     <article>
       <section>
-        <h1>JavaScript Unit Testing</h1><img src="images/dilberttestscript.jpg" width="597">
+        <h1>JavaScript<br>Unit Testing</h1><img src="images/dilberttestscript.jpg" width="597">
       </section>
       <section>
         <h2>Why should we automate client side testing?</h2>
         <div class="imagebox"><img src="images/bigquestionmark.png" width="150" class="float-left">
-          <div class="sidebar">Many of the same reasons we test our server side code</div>
+          <ul>
+            <li>
+              <li class="list-oomph">Business logic is moving from server to client</li>
+              <li class="list-oomph">Many of the same reasons we test our server side code</li>
+            </li>
+          </ul>
         </div>
       </section>
       <section>
@@ -28,15 +33,15 @@
         </ul>
       </section>
       <section>
-        <h2>Prevent regressions</h2><img src="images/gorilla-callout.png" width="500">
+        <h2>Prevent regressions</h2><img src="images/gorilla-with-mac.png" width="500">
       </section>
       <section>
-        <h2>Also known as...</h2>
-        <h2>Whack-a-mole!</h2><img src="images/whackamole.jpg">
+        <h2>a.k.a. Whack-a-mole!</h2>
+        <h3>Fix a bug, introduce another...</h3><img src="images/whackamole.jpg">
       </section>
       <section>
         <h2>Document Specs</h2>
-        <hr>
+        <h3>The only documentation that is kept up to date</h3>
         <pre><code class="language-javascript">// Assume passwordValidator module has been loaded...
 describe('Password Validator', function() {
   it('Rejects short passwords', function() {
@@ -62,16 +67,16 @@ describe('Password Validator', function() {
       </section>
       <section>
         <h2>In the words of Uncle Bob...</h2>
-        <blockquote cite="http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd">Why don't we clean up code that we know is messy? We're afraid we'll break it. But if we have the tests, we can be reasonably sure that the code is not broken, or that we'll detect the breakage immediately. If we have the tests we become fearless about making changes. If we see messy code, or an unclean structure, we can clean it without fear. Because of the tests, the code becomes malleable again. Because of the tests, software becomes soft again.</blockquote>
+        <p class="custom-quote"><i class="fa fa-quote-left fa-3x pull-left fa-border quote-border"></i>Why don't we clean up code that we know is messy? We're afraid we'll break it. But if we have the tests, we can be reasonably sure that the code is not broken, or that we'll detect the breakage immediately. If we have the tests we become fearless about making changes. If we see messy code, or an unclean structure, we can clean it without fear. Because of the tests, the code becomes malleable again. Because of the tests, software becomes soft again.</p>
       </section>
       <section>
-        <h2>JavaScript specific testing challenges</h2>
+        <h2>JavaScript specific unit testing challenges</h2>
         <ul>
           <li></li>
           <li class="list-oomph">What are the units?<i class="fa fa-cubes icon-padding fa-lg"></i></li>
           <li class="list-oomph">Asynchronous execution<i class="fa fa-random icon-padding"></i></li>
           <li class="list-oomph">DOM manipulation<i class="fa fa-file-code-o icon-padding"></i></li>
-          <li class="list-oomph">What tools are available?<i class="fa fa-cog fa-spin"></i></li>
+          <li class="list-oomph">What tools are available?&nbsp;<i class="fa fa-cog fa-spin"></i></li>
         </ul>
       </section>
       <section>

@@ -1951,7 +1951,7 @@ blockquote {
   color: #4b4949;
 }
 .list-oomph {
-  color: #6f0102;
+  color: #100849;
   font-weight: bold;
   font-size: 1.6em;
 }
@@ -1969,4 +1969,16 @@ blockquote {
 }
 .big-heading {
   margin-bottom: 17px;
+}
+.custom-quote {
+  text-align: left;
+  color: #4b4949;
+  font-size: 1.2em;
+  font-style: italic;
+  line-height: 1.3em;
+  margin-left: 20px;
+  margin-right: 10px;
+}
+.quote-border {
+  border-color: #5e82a8;
 }
