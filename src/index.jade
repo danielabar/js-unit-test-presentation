@@ -17,14 +17,20 @@ html
     article
 
       section
-        h1 JavaScript Unit Testing
+        h1 JavaScript
+          br
+          | Unit Testing
         img(src="images/dilberttestscript.jpg" width="597")
 
       section
         h2 Why should we automate client side testing?
         .imagebox
           img.float-left(src="images/bigquestionmark.png" width="150")
-          .sidebar Many of the same reasons we test our server side code
+          //- .sidebar
+          ul
+            li
+              li.list-oomph Business logic is moving from server to client
+              li.list-oomph Many of the same reasons we test our server side code
 
       section
         h2 Verify Expectations
@@ -41,16 +47,16 @@ html
 
       section
         h2 Prevent regressions
-        img(src="images/gorilla-callout.png" width="500")
+        img(src="images/gorilla-with-mac.png" width="500")
 
       section
-        h2 Also known as...
-        h2 Whack-a-mole!
+        h2 a.k.a. Whack-a-mole!
+        h3 Fix a bug, introduce another...
         img(src="images/whackamole.jpg")
 
       section
         h2 Document Specs
-        hr
+        h3 The only documentation that is kept up to date
         pre
           code.language-javascript.
             // Assume passwordValidator module has been loaded...
@@ -80,10 +86,13 @@ html
 
       section
         h2 In the words of Uncle Bob...
-        blockquote(cite="http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd") Why don't we clean up code that we know is messy? We're afraid we'll break it. But if we have the tests, we can be reasonably sure that the code is not broken, or that we'll detect the breakage immediately. If we have the tests we become fearless about making changes. If we see messy code, or an unclean structure, we can clean it without fear. Because of the tests, the code becomes malleable again. Because of the tests, software becomes soft again.
+        //- blockquote(cite="http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd")
+        p.custom-quote
+          i.fa.fa-quote-left.fa-3x.pull-left.fa-border.quote-border
+          | Why don't we clean up code that we know is messy? We're afraid we'll break it. But if we have the tests, we can be reasonably sure that the code is not broken, or that we'll detect the breakage immediately. If we have the tests we become fearless about making changes. If we see messy code, or an unclean structure, we can clean it without fear. Because of the tests, the code becomes malleable again. Because of the tests, software becomes soft again.
 
       section
-        h2 JavaScript specific testing challenges
+        h2 JavaScript specific unit testing challenges
         ul
           li
           li.list-oomph What are the units?
@@ -92,7 +101,7 @@ html
             i.fa.fa-random.icon-padding
           li.list-oomph DOM manipulation
             i.fa.fa-file-code-o.icon-padding
-          li.list-oomph What tools are available?
+          li.list-oomph What tools are available?&nbsp;
             i.fa.fa-cog.fa-spin
 
       section
