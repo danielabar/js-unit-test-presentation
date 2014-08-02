@@ -1967,3 +1967,6 @@ blockquote {
 .error {
   color: #ee0e0e;
 }
+.big-heading {
+  margin-bottom: 17px;
+}

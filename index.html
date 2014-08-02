@@ -69,12 +69,13 @@ describe('Password Validator', function() {
         <ul>
           <li></li>
           <li class="list-oomph">What are the units?<i class="fa fa-cubes icon-padding fa-lg"></i></li>
-          <li class="list-oomph">Asynchronous execution<i class="fa fa-exchange icon-padding"></i></li>
+          <li class="list-oomph">Asynchronous execution<i class="fa fa-random icon-padding"></i></li>
           <li class="list-oomph">DOM manipulation<i class="fa fa-file-code-o icon-padding"></i></li>
+          <li class="list-oomph">What tools are available?<i class="fa fa-cog fa-spin"></i></li>
         </ul>
       </section>
       <section>
-        <h2>What are the units?</h2>
+        <h2 class="big-heading">What are the units?</h2>
         <pre><code class="language-javascript">$('button').click(function() {
   var query = $('input').text();
   // Validation rule: only search if we have a query of at least two chars
@@ -107,15 +108,14 @@ describe('Password Validator', function() {
       </section>
       <section>
         <h2>Use a module system</h2>
-        <h3>Break up logic into small functions, declare dependencies in separate modules</h3>
         <pre><code class="language-javascript">// News Module
 define(['jquery', 'sentiment'], function($, sentiment) {
   var init = function(config) { ... },
   var validate = function(query) { ... },
   var search = function(query) { ... },
   var display = function(loadInto, items) { ... }
-});
-</code></pre>
+});</code></pre>
+        <h3>Break up logic into small functions<br>Declare dependencies in separate modules</h3>
       </section>
       <section>
         <h2>A stack for JS testing</h2>
