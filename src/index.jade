@@ -89,12 +89,14 @@ html
           li.list-oomph What are the units?
             i.fa.fa-cubes.icon-padding.fa-lg
           li.list-oomph Asynchronous execution
-            i.fa.fa-exchange.icon-padding
+            i.fa.fa-random.icon-padding
           li.list-oomph DOM manipulation
             i.fa.fa-file-code-o.icon-padding
+          li.list-oomph What tools are available?
+            i.fa.fa-cog.fa-spin
 
       section
-        h2 What are the units?
+        h2.big-heading What are the units?
         pre
           code.language-javascript.
             $('button').click(function() {
@@ -128,7 +130,6 @@ html
 
       section
         h2 Use a module system
-        h3 Break up logic into small functions, declare dependencies in separate modules
         pre
           code.language-javascript.
             // News Module
@@ -138,6 +139,9 @@ html
               var search = function(query) { ... },
               var display = function(loadInto, items) { ... }
             });
+        h3 Break up logic into small functions
+          br
+          | Declare dependencies in separate modules
 
       section
         h2 A stack for JS testing
