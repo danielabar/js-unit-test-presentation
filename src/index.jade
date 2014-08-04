@@ -55,15 +55,19 @@ html
 
       section
         h2 a.k.a. Whack-a-mole!
-        h3 Fix a bug, introduce another...
+        //- h3 Fix a bug, introduce another...
         img(src="images/whackamole.jpg")
+        ul.left-align.fa-ul
+          li
+          li.list-oomph.smell
+              i.fa-li.fa.fa-frown-o.fa-lg
+              | Fix a bug, introduce another...
 
       section
         h2 Document Specs
         h3 The only documentation that is kept up to date
-        pre
+        pre.hack-height-2
           code.language-javascript.
-            // Assume passwordValidator module has been loaded...
             describe('Password Validator', function() {
               it('Rejects short passwords', function() {
                 var password = 'foo';
@@ -86,14 +90,19 @@ html
         .imagebox
           img.img-padding(src="images/clean-code-circle.png" width="200" height="200")
           img.img-padding(src="images/no-fish-circle.png" width="210" height="210")
-        h3 If it's hard to test, that's a code smell
+        ul.left-align.fa-ul
+          li
+          li.list-oomph.smell
+              i.fa-li.fa.fa-arrow-circle-right.fa-lg
+              | If it's hard to test, that's a smell!
 
       section
         h2 In the words of Uncle Bob...
         p.custom-quote
           i.fa.fa-quote-left.fa-3x.pull-left.fa-border.quote-border
           | Why don't we clean up code that we know is messy? We're afraid we'll break it. But if we have the tests, we can be reasonably sure that the code is not broken, or that we'll detect the breakage immediately. If we have the tests we become fearless about making changes. If we see messy code, or an unclean structure, we can clean it without fear. Because of the tests, the code becomes malleable again. Because of the tests, software becomes soft again.
-        a(href="http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd") The Three Rules of TDD
+        .custom-cite
+          a(href="http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd") The Three Rules of TDD
 
       section
         h2 JavaScript Unit Testing Challenges
@@ -147,18 +156,24 @@ html
 
       section
         h2 Use a module system
-        pre
+        pre.hack-height
           code.language-javascript.
             // News Module
             define(['jquery', 'sentiment'], function($, sentiment) {
               var init = function(config) { ... },
               var validate = function(query) { ... },
               var search = function(query) { ... },
+              var process = function(items) { ... },
               var display = function(loadInto, items) { ... }
             });
-        h3 Break up logic into small functions
-          br
-          | Declare dependencies in separate modules
+        ul.left-align.fa-ul
+          li
+          li.list-oomph
+              i.fa-li.fa.fa-arrow-circle-right.fa-lg
+              | Break up logic into small functions
+          li.list-oomph
+              i.fa-li.fa.fa-arrow-circle-right.fa-lg
+              | Declare dependencies in separate modules
 
       section
         h2 Stack for BDD Style Testing
@@ -188,56 +203,74 @@ html
             define(['../news', 'jquery'], function(fixture, $) {
               describe('News Module', function() {
                 it('Does something', function() {
-                  expect(fixture.someMethod()).to.equal('something');
+                  expect(fixture.foo()).to.equal('bar');
                 });
               });
             });
 
       section
-        h2 Demo
+        h2
+          a(href="https://github.com/danielabar/learn-js-test") Demo
         h3 Simple function with inputs and output
-        ul.left-align
+        ul.left-align.fa-ul
           li
-          li.list-oomph No dependencies
-          li.list-oomph Synchronous
-          li.list-oomph No side effects
-
-      // TODO Demo
-      section
-        h2 Mock out dependencies
-        pre
-          code.language-javascript.
-            define(['../news', '../sentiment'], function(fixture, sentiment) {
-              it('News conversion delegates to sentiment analysis', function() {
-
-                var sentimentStub = sinon.stub(sentiment, 'analyze');
-                sentimentStub.onCall(0).returns('positive');
-                sentimentStub.onCall(2).returns('negative');
-
-                var itemsFromApi = [{content: 'foo'}, {content: 'bar'}];
-                var result = fixture.process(itemsFromApi);
-
-                sinon.assert.calledwith(sentimentStub, 'foo')
-                sinon.assert.calledwith(sentimentStub, 'bar')
-              });
-            });
+          li.list-oomph
+              i.fa-li.fa.fa-arrow-circle-right.fa-lg
+              | No dependencies
+          li.list-oomph
+              i.fa-li.fa.fa-arrow-circle-right.fa-lg
+              | Synchronous
+          li.list-oomph
+              i.fa-li.fa.fa-arrow-circle-right.fa-lg
+              | No side effects
 
       section
-        h2 Demo
-        h3 Async execution with sinon stub and mocha done
-        a(href="https://github.com/danielabar/learn-js-test/blob/master/app/scripts/news.js") Source
-        | var search = function(query)...
-        a(href="https://github.com/danielabar/learn-js-test/blob/master/test/NewsSpec.js") Spec
-        | describe('Search', function()...
+        h2
+          a(href="https://github.com/danielabar/learn-js-test") Demo
+        h3 Using Sinon to mock out dependency
+        ul.left-align.fa-ul
+          li
+          li.list-oomph
+              i.fa-li.fa.fa-arrow-circle-right.fa-lg
+              | Test one thing only
+          li.list-oomph
+              i.fa-li.fa.fa-arrow-circle-right.fa-lg
+              | Mock out everything else
+          li.list-oomph
+              i.fa-li.fa.fa-arrow-circle-right.fa-lg
+              | Verify interactions
 
       section
-        h2 Demo
-        h3 DOM manipulation with Karma html2js plugin
-        a(href="https://github.com/danielabar/learn-js-test/blob/master/app/scripts/news.js") Source
-        | var display = function(loadInto, displayItems)...
-        a(href="https://github.com/danielabar/learn-js-test/blob/master/test/NewsSpec.js") Spec
-        | describe('Display', function()...
-        a(href="https://github.com/danielabar/learn-js-test/blob/master/test/html/AppSpec.html") HTML snippet
+        h2
+          a(href="https://github.com/danielabar/learn-js-test") Demo
+        h3 Asynchronous Execution
+        ul.left-align.fa-ul
+          li
+          li.list-oomph
+              i.fa-li.fa.fa-arrow-circle-right.fa-lg
+              | Use promises
+          li.list-oomph
+              i.fa-li.fa.fa-arrow-circle-right.fa-lg
+              | Use sinon to mock and replace function - resolve or reject
+          li.list-oomph
+              i.fa-li.fa.fa-arrow-circle-right.fa-lg
+              | Call Mocha's done() method to signify end of test
+
+      section
+        h2
+          a(href="https://github.com/danielabar/learn-js-test") Demo
+        h3 DOM Manipulation
+        ul.left-align.fa-ul
+          li
+          li.list-oomph
+              i.fa-li.fa.fa-arrow-circle-right.fa-lg
+              | Use Karma html2js plugin
+          li.list-oomph
+              i.fa-li.fa.fa-arrow-circle-right.fa-lg
+              | Inject HTML snippet for code to operate on
+          li.list-oomph
+              i.fa-li.fa.fa-arrow-circle-right.fa-lg
+              | Use jQuery to verify HTML snippet was modified
 
       section
         h2 Karma goodies
@@ -258,9 +291,7 @@ html
             a(href="https://www.npmjs.org/search?q=karma") Many other plugins available
 
       section
-        h2 Further References
-        ul
-          li TBD...
+        h2 Q &amp; A
 
     // build:js scripts/scripts.js
     script(src='bower_components/bespoke.js/dist/bespoke.min.js')

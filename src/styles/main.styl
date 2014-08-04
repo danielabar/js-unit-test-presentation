@@ -24,10 +24,11 @@ bullet_transition_easing = ease
 bullet_transition_translate_x = 16px
 
 cherry_red = #6F0102
+bright_red = #EE0E0E
+medium_red = #B80106
 happy_green = #045C1D
 bright_yellow = #DBDB28
 greyish_blue = #3F4C6B
-bright_red = #EE0E0E
 greyish_blue2 = #5E82A8
 navy_blue = #100849
 // base
@@ -177,10 +178,10 @@ section.bespoke-inactive
 
 .bespoke-slide pre
   width: (slide_width - 15)
-  padding: 15px !important
-  border-radius: .3em
-  border: .3em solid hsl(0,0%,33%) /* #282A2B */
-  box-shadow: 1px 1px .3em black inset
+  padding: 6px !important
+  border-radius: 0.1em
+  border: 0.1em solid black
+  box-shadow: none
   margin: .3em 0
 
 // content styles
@@ -264,13 +265,16 @@ blockquote
 .error
   color: bright_red
 
+.smell
+  color: medium_red
+
 .big-heading
   margin-bottom: 17px
 
 .custom-quote
   text-align: left
   color: #4B4949
-  font-size: 1.2em
+  font-size: 1.3em
   font-style: italic
   line-height: 1.3em
   margin-left: 20px
@@ -279,5 +283,15 @@ blockquote
 .quote-border
   border-color: greyish_blue2
 
+.custom-cite
+  text-align: right
+  width: slide_width - 70
+
 .left-align
-  text-align: left;
+  text-align: left
+
+.hack-height
+  height: 260px
+
+.hack-height-2
+  height: 470px
