@@ -1953,7 +1953,7 @@ blockquote {
 .list-oomph {
   color: #100849;
   font-weight: bold;
-  font-size: 1.6em;
+  font-size: 1.7em;
 }
 .success {
   color: #045c1d;
@@ -1981,4 +1981,7 @@ blockquote {
 }
 .quote-border {
   border-color: #5e82a8;
+}
+.left-align {
+  text-align: left;
 }

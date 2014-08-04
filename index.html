@@ -14,22 +14,22 @@
       <section>
         <h2>Why should we automate client side testing?</h2>
         <div class="imagebox"><img src="images/bigquestionmark.png" width="150" class="float-left">
-          <ul>
+          <ul class="left-align">
             <li>
               <li class="list-oomph">Business logic is moving from server to client</li>
-              <li class="list-oomph">Many of the same reasons we test our server side code</li>
+              <li class="list-oomph">The same benefits of server side testing transfer to client</li>
             </li>
           </ul>
         </div>
       </section>
       <section>
         <h2>Verify Expectations</h2>
-        <ul>
+        <ul class="left-align fa-ul">
           <li></li>
-          <li class="list-oomph success">Happy path<i class="fa fa-thumbs-up icon-padding"></i></li>
-          <li class="list-oomph error">Error conditions<i class="fa fa-thumbs-down icon-padding"></i></li>
-          <li class="list-oomph alert">Invalid input<i class="fa fa-times icon-padding"></i></li>
-          <li class="list-oomph unexpected">Unexpected input<i class="fa fa-warning icon-padding"></i></li>
+          <li class="list-oomph success"><i class="fa-li fa fa-thumbs-up fa-lg"></i>Happy path</li>
+          <li class="list-oomph error"><i class="fa-li fa fa-thumbs-down fa-lg"></i>Error conditions</li>
+          <li class="list-oomph alert"><i class="fa-li fa fa-times icon-padding fa-lg"></i>Invalid input</li>
+          <li class="list-oomph unexpected"><i class="fa-li fa fa-warning icon-padding fa-lg"></i>Unexpected input</li>
         </ul>
       </section>
       <section>
@@ -67,16 +67,16 @@ describe('Password Validator', function() {
       </section>
       <section>
         <h2>In the words of Uncle Bob...</h2>
-        <p class="custom-quote"><i class="fa fa-quote-left fa-3x pull-left fa-border quote-border"></i>Why don't we clean up code that we know is messy? We're afraid we'll break it. But if we have the tests, we can be reasonably sure that the code is not broken, or that we'll detect the breakage immediately. If we have the tests we become fearless about making changes. If we see messy code, or an unclean structure, we can clean it without fear. Because of the tests, the code becomes malleable again. Because of the tests, software becomes soft again.</p>
+        <p class="custom-quote"><i class="fa fa-quote-left fa-3x pull-left fa-border quote-border"></i>Why don't we clean up code that we know is messy? We're afraid we'll break it. But if we have the tests, we can be reasonably sure that the code is not broken, or that we'll detect the breakage immediately. If we have the tests we become fearless about making changes. If we see messy code, or an unclean structure, we can clean it without fear. Because of the tests, the code becomes malleable again. Because of the tests, software becomes soft again.</p><a href="http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd">The Three Rules of TDD</a>
       </section>
       <section>
-        <h2>JavaScript specific unit testing challenges</h2>
-        <ul>
+        <h2>JavaScript Unit Testing Challenges</h2>
+        <ul class="left-align fa-ul">
           <li></li>
-          <li class="list-oomph">What are the units?<i class="fa fa-cubes icon-padding fa-lg"></i></li>
-          <li class="list-oomph">Asynchronous execution<i class="fa fa-random icon-padding"></i></li>
-          <li class="list-oomph">DOM manipulation<i class="fa fa-file-code-o icon-padding"></i></li>
-          <li class="list-oomph">What tools are available?&nbsp;<i class="fa fa-cog fa-spin"></i></li>
+          <li class="list-oomph"><i class="fa-li fa fa-cubes fa-lg"></i>What are the units?</li>
+          <li class="list-oomph"><i class="fa-li fa fa-random fa-lg"></i>Asynchronous execution</li>
+          <li class="list-oomph"><i class="fa-li fa fa-file-code-o fa-lg"></i>DOM manipulation</li>
+          <li class="list-oomph"><i class="fa-li fa fa-cog fa-spin fa-lg"></i>What tools are available?</li>
         </ul>
       </section>
       <section>
@@ -123,13 +123,14 @@ define(['jquery', 'sentiment'], function($, sentiment) {
         <h3>Break up logic into small functions<br>Declare dependencies in separate modules</h3>
       </section>
       <section>
-        <h2>A stack for JS testing</h2>
-        <ul>
+        <h2>Stack for BDD Style Testing</h2>
+        <ul class="left-align">
           <li></li>
           <li><a href="http://visionmedia.github.io/mocha/">Mocha test framework</a> describe... it...</li>
           <li><a href="http://chaijs.com/api/bdd/">Chai Assertion Library</a> expect... to...</li>
           <li><a href="http://sinonjs.org/docs/">Sinon.JS</a> spies, stubs, and mocks</li>
           <li><a href="http://karma-runner.github.io/0.12/intro/how-it-works.html">Karma Runner</a> Multiple browsers, reporters</li>
+          <li><a href="https://github.com/karma-runner/grunt-karma">Grunt</a> Run automation, local and CI</li>
         </ul>
       </section>
       <section>
@@ -146,7 +147,13 @@ define(['../news', 'jquery'], function(fixture, $) {
       </section>
       <section>
         <h2>Demo</h2>
-        <h3>Simple function with no dependencies</h3><a href="https://github.com/danielabar/learn-js-test/blob/master/app/scripts/news.js">Source</a>var validate = function(value)...<a href="https://github.com/danielabar/learn-js-test/blob/master/test/NewsSpec.js">Spec</a>describe('Validate', function()...
+        <h3>Simple function with inputs and output</h3>
+        <ul class="left-align">
+          <li></li>
+          <li class="list-oomph">No dependencies</li>
+          <li class="list-oomph">Synchronous</li>
+          <li class="list-oomph">No side effects</li>
+        </ul>
       </section>
       <!-- TODO Demo-->
       <section>
