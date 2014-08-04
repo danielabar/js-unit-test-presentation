@@ -27,23 +27,27 @@ html
         .imagebox
           img.float-left(src="images/bigquestionmark.png" width="150")
           //- .sidebar
-          ul
+          ul.left-align
             li
               li.list-oomph Business logic is moving from server to client
-              li.list-oomph Many of the same reasons we test our server side code
+              li.list-oomph The same benefits of server side testing transfer to client
 
       section
         h2 Verify Expectations
-        ul
+        ul.left-align.fa-ul
           li
-          li.list-oomph.success Happy path
-            i.fa.fa-thumbs-up.icon-padding
-          li.list-oomph.error Error conditions
-            i.fa.fa-thumbs-down.icon-padding
-          li.list-oomph.alert Invalid input
-            i.fa.fa-times.icon-padding
-          li.list-oomph.unexpected Unexpected input
-            i.fa.fa-warning.icon-padding
+          li.list-oomph.success
+              i.fa-li.fa.fa-thumbs-up.fa-lg
+              | Happy path
+          li.list-oomph.error
+              i.fa-li.fa.fa-thumbs-down.fa-lg
+              | Error conditions
+          li.list-oomph.alert
+              i.fa-li.fa.fa-times.icon-padding.fa-lg
+              | Invalid input
+          li.list-oomph.unexpected
+              i.fa-li.fa.fa-warning.icon-padding.fa-lg
+              | Unexpected input
 
       section
         h2 Prevent regressions
@@ -86,23 +90,27 @@ html
 
       section
         h2 In the words of Uncle Bob...
-        //- blockquote(cite="http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd")
         p.custom-quote
           i.fa.fa-quote-left.fa-3x.pull-left.fa-border.quote-border
           | Why don't we clean up code that we know is messy? We're afraid we'll break it. But if we have the tests, we can be reasonably sure that the code is not broken, or that we'll detect the breakage immediately. If we have the tests we become fearless about making changes. If we see messy code, or an unclean structure, we can clean it without fear. Because of the tests, the code becomes malleable again. Because of the tests, software becomes soft again.
+        a(href="http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd") The Three Rules of TDD
 
       section
-        h2 JavaScript specific unit testing challenges
-        ul
+        h2 JavaScript Unit Testing Challenges
+        ul.left-align.fa-ul
           li
-          li.list-oomph What are the units?
-            i.fa.fa-cubes.icon-padding.fa-lg
-          li.list-oomph Asynchronous execution
-            i.fa.fa-random.icon-padding
-          li.list-oomph DOM manipulation
-            i.fa.fa-file-code-o.icon-padding
-          li.list-oomph What tools are available?&nbsp;
-            i.fa.fa-cog.fa-spin
+          li.list-oomph
+              i.fa-li.fa.fa-cubes.fa-lg
+              | What are the units?
+          li.list-oomph
+              i.fa-li.fa.fa-random.fa-lg
+              | Asynchronous execution
+          li.list-oomph
+              i.fa-li.fa.fa-file-code-o.fa-lg
+              | DOM manipulation
+          li.list-oomph
+              i.fa-li.fa.fa-cog.fa-spin.fa-lg
+              | What tools are available?
 
       section
         h2.big-heading What are the units?
@@ -153,8 +161,8 @@ html
           | Declare dependencies in separate modules
 
       section
-        h2 A stack for JS testing
-        ul
+        h2 Stack for BDD Style Testing
+        ul.left-align
           li
           li
             a(href="http://visionmedia.github.io/mocha/") Mocha test framework
@@ -168,6 +176,9 @@ html
           li
             a(href="http://karma-runner.github.io/0.12/intro/how-it-works.html") Karma Runner
             |  Multiple browsers, reporters
+          li
+            a(href="https://github.com/karma-runner/grunt-karma") Grunt
+            |  Run automation, local and CI
 
       section
         h2 Load module in a test
@@ -184,11 +195,12 @@ html
 
       section
         h2 Demo
-        h3 Simple function with no dependencies
-        a(href="https://github.com/danielabar/learn-js-test/blob/master/app/scripts/news.js") Source
-        | var validate = function(value)...
-        a(href="https://github.com/danielabar/learn-js-test/blob/master/test/NewsSpec.js") Spec
-        | describe('Validate', function()...
+        h3 Simple function with inputs and output
+        ul.left-align
+          li
+          li.list-oomph No dependencies
+          li.list-oomph Synchronous
+          li.list-oomph No side effects
 
       // TODO Demo
       section
