@@ -1880,13 +1880,12 @@ li.bespoke-bullet-inactive {
 }
 .bespoke-slide pre {
   width: 625px;
-  padding: 15px !important;
-  -webkit-border-radius: 0.3em;
-  border-radius: 0.3em;
-  border: 0.3em solid #545454;
-/* #282A2B */
-  -webkit-box-shadow: 1px 1px 0.3em #000 inset;
-  box-shadow: 1px 1px 0.3em #000 inset;
+  padding: 6px !important;
+  -webkit-border-radius: 0.1em;
+  border-radius: 0.1em;
+  border: 0.1em solid #000;
+  -webkit-box-shadow: none;
+  box-shadow: none;
   margin: 0.3em 0;
 }
 body {
@@ -1967,13 +1966,16 @@ blockquote {
 .error {
   color: #ee0e0e;
 }
+.smell {
+  color: #b80106;
+}
 .big-heading {
   margin-bottom: 17px;
 }
 .custom-quote {
   text-align: left;
   color: #4b4949;
-  font-size: 1.2em;
+  font-size: 1.3em;
   font-style: italic;
   line-height: 1.3em;
   margin-left: 20px;
@@ -1982,6 +1984,16 @@ blockquote {
 .quote-border {
   border-color: #5e82a8;
 }
+.custom-cite {
+  text-align: right;
+  width: 570px;
+}
 .left-align {
   text-align: left;
+}
+.hack-height {
+  height: 260px;
+}
+.hack-height-2 {
+  height: 470px;
 }

@@ -36,14 +36,16 @@
         <h2>Prevent regressions</h2><img src="images/gorilla-with-mac.png" width="500">
       </section>
       <section>
-        <h2>a.k.a. Whack-a-mole!</h2>
-        <h3>Fix a bug, introduce another...</h3><img src="images/whackamole.jpg">
+        <h2>a.k.a. Whack-a-mole!</h2><img src="images/whackamole.jpg">
+        <ul class="left-align fa-ul">
+          <li></li>
+          <li class="list-oomph smell"><i class="fa-li fa fa-frown-o fa-lg"></i>Fix a bug, introduce another...</li>
+        </ul>
       </section>
       <section>
         <h2>Document Specs</h2>
         <h3>The only documentation that is kept up to date</h3>
-        <pre><code class="language-javascript">// Assume passwordValidator module has been loaded...
-describe('Password Validator', function() {
+        <pre class="hack-height-2"><code class="language-javascript">describe('Password Validator', function() {
   it('Rejects short passwords', function() {
     var password = 'foo';
     var result = passwordValidator.isValid(password);
@@ -63,11 +65,15 @@ describe('Password Validator', function() {
       <section>
         <h2>Leads to cleaner code</h2>
         <div class="imagebox"><img src="images/clean-code-circle.png" width="200" height="200" class="img-padding"><img src="images/no-fish-circle.png" width="210" height="210" class="img-padding"></div>
-        <h3>If it's hard to test, that's a code smell</h3>
+        <ul class="left-align fa-ul">
+          <li></li>
+          <li class="list-oomph smell"><i class="fa-li fa fa-arrow-circle-right fa-lg"></i>If it's hard to test, that's a smell!</li>
+        </ul>
       </section>
       <section>
         <h2>In the words of Uncle Bob...</h2>
-        <p class="custom-quote"><i class="fa fa-quote-left fa-3x pull-left fa-border quote-border"></i>Why don't we clean up code that we know is messy? We're afraid we'll break it. But if we have the tests, we can be reasonably sure that the code is not broken, or that we'll detect the breakage immediately. If we have the tests we become fearless about making changes. If we see messy code, or an unclean structure, we can clean it without fear. Because of the tests, the code becomes malleable again. Because of the tests, software becomes soft again.</p><a href="http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd">The Three Rules of TDD</a>
+        <p class="custom-quote"><i class="fa fa-quote-left fa-3x pull-left fa-border quote-border"></i>Why don't we clean up code that we know is messy? We're afraid we'll break it. But if we have the tests, we can be reasonably sure that the code is not broken, or that we'll detect the breakage immediately. If we have the tests we become fearless about making changes. If we see messy code, or an unclean structure, we can clean it without fear. Because of the tests, the code becomes malleable again. Because of the tests, software becomes soft again.</p>
+        <div class="custom-cite"><a href="http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd">The Three Rules of TDD</a></div>
       </section>
       <section>
         <h2>JavaScript Unit Testing Challenges</h2>
@@ -113,14 +119,19 @@ describe('Password Validator', function() {
       </section>
       <section>
         <h2>Use a module system</h2>
-        <pre><code class="language-javascript">// News Module
+        <pre class="hack-height"><code class="language-javascript">// News Module
 define(['jquery', 'sentiment'], function($, sentiment) {
   var init = function(config) { ... },
   var validate = function(query) { ... },
   var search = function(query) { ... },
+  var process = function(items) { ... },
   var display = function(loadInto, items) { ... }
 });</code></pre>
-        <h3>Break up logic into small functions<br>Declare dependencies in separate modules</h3>
+        <ul class="left-align fa-ul">
+          <li></li>
+          <li class="list-oomph"><i class="fa-li fa fa-arrow-circle-right fa-lg"></i>Break up logic into small functions</li>
+          <li class="list-oomph"><i class="fa-li fa fa-arrow-circle-right fa-lg"></i>Declare dependencies in separate modules</li>
+        </ul>
       </section>
       <section>
         <h2>Stack for BDD Style Testing</h2>
@@ -139,48 +150,51 @@ define(['jquery', 'sentiment'], function($, sentiment) {
 define(['../news', 'jquery'], function(fixture, $) {
   describe('News Module', function() {
     it('Does something', function() {
-      expect(fixture.someMethod()).to.equal('something');
+      expect(fixture.foo()).to.equal('bar');
     });
   });
 });
 </code></pre>
       </section>
       <section>
-        <h2>Demo</h2>
+        <h2><a href="https://github.com/danielabar/learn-js-test">Demo</a></h2>
         <h3>Simple function with inputs and output</h3>
-        <ul class="left-align">
+        <ul class="left-align fa-ul">
           <li></li>
-          <li class="list-oomph">No dependencies</li>
-          <li class="list-oomph">Synchronous</li>
-          <li class="list-oomph">No side effects</li>
+          <li class="list-oomph"><i class="fa-li fa fa-arrow-circle-right fa-lg"></i>No dependencies</li>
+          <li class="list-oomph"><i class="fa-li fa fa-arrow-circle-right fa-lg"></i>Synchronous</li>
+          <li class="list-oomph"><i class="fa-li fa fa-arrow-circle-right fa-lg"></i>No side effects</li>
         </ul>
       </section>
-      <!-- TODO Demo-->
       <section>
-        <h2>Mock out dependencies</h2>
-        <pre><code class="language-javascript">define(['../news', '../sentiment'], function(fixture, sentiment) {
-  it('News conversion delegates to sentiment analysis', function() {
-  
-    var sentimentStub = sinon.stub(sentiment, 'analyze');
-    sentimentStub.onCall(0).returns('positive');
-    sentimentStub.onCall(2).returns('negative');
-    
-    var itemsFromApi = [{content: 'foo'}, {content: 'bar'}];
-    var result = fixture.process(itemsFromApi);
-    
-    sinon.assert.calledwith(sentimentStub, 'foo')
-    sinon.assert.calledwith(sentimentStub, 'bar')
-  });
-});
-</code></pre>
+        <h2><a href="https://github.com/danielabar/learn-js-test">Demo</a></h2>
+        <h3>Using Sinon to mock out dependency</h3>
+        <ul class="left-align fa-ul">
+          <li></li>
+          <li class="list-oomph"><i class="fa-li fa fa-arrow-circle-right fa-lg"></i>Test one thing only</li>
+          <li class="list-oomph"><i class="fa-li fa fa-arrow-circle-right fa-lg"></i>Mock out everything else</li>
+          <li class="list-oomph"><i class="fa-li fa fa-arrow-circle-right fa-lg"></i>Verify interactions</li>
+        </ul>
       </section>
       <section>
-        <h2>Demo</h2>
-        <h3>Async execution with sinon stub and mocha done</h3><a href="https://github.com/danielabar/learn-js-test/blob/master/app/scripts/news.js">Source</a>var search = function(query)...<a href="https://github.com/danielabar/learn-js-test/blob/master/test/NewsSpec.js">Spec</a>describe('Search', function()...
+        <h2><a href="https://github.com/danielabar/learn-js-test">Demo</a></h2>
+        <h3>Asynchronous Execution</h3>
+        <ul class="left-align fa-ul">
+          <li></li>
+          <li class="list-oomph"><i class="fa-li fa fa-arrow-circle-right fa-lg"></i>Use promises</li>
+          <li class="list-oomph"><i class="fa-li fa fa-arrow-circle-right fa-lg"></i>Use sinon to mock and replace function - resolve or reject</li>
+          <li class="list-oomph"><i class="fa-li fa fa-arrow-circle-right fa-lg"></i>Call Mocha's done() method to signify end of test</li>
+        </ul>
       </section>
       <section>
-        <h2>Demo</h2>
-        <h3>DOM manipulation with Karma html2js plugin</h3><a href="https://github.com/danielabar/learn-js-test/blob/master/app/scripts/news.js">Source</a>var display = function(loadInto, displayItems)...<a href="https://github.com/danielabar/learn-js-test/blob/master/test/NewsSpec.js">Spec</a>describe('Display', function()...<a href="https://github.com/danielabar/learn-js-test/blob/master/test/html/AppSpec.html">HTML snippet</a>
+        <h2><a href="https://github.com/danielabar/learn-js-test">Demo</a></h2>
+        <h3>DOM Manipulation</h3>
+        <ul class="left-align fa-ul">
+          <li></li>
+          <li class="list-oomph"><i class="fa-li fa fa-arrow-circle-right fa-lg"></i>Use Karma html2js plugin</li>
+          <li class="list-oomph"><i class="fa-li fa fa-arrow-circle-right fa-lg"></i>Inject HTML snippet for code to operate on</li>
+          <li class="list-oomph"><i class="fa-li fa fa-arrow-circle-right fa-lg"></i>Use jQuery to verify HTML snippet was modified</li>
+        </ul>
       </section>
       <section>
         <h2>Karma goodies</h2>
@@ -193,10 +207,7 @@ define(['../news', 'jquery'], function(fixture, $) {
         </ul>
       </section>
       <section>
-        <h2>Further References</h2>
-        <ul>
-          <li>TBD...</li>
-        </ul>
+        <h2>Q &amp; A</h2>
       </section>
     </article>
     <script src="scripts/scripts.js"></script>
