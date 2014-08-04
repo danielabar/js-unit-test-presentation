@@ -1876,7 +1876,7 @@ li.bespoke-bullet-inactive {
 }
 .emphatic,
 .emphatic .bespoke-slide {
-  background: #eaeaea;
+  background: #195b87;
 }
 .bespoke-slide pre {
   width: 625px;
@@ -1996,4 +1996,8 @@ blockquote {
 }
 .hack-height-2 {
   height: 470px;
+}
+.img-border {
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
 }
