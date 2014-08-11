@@ -37,14 +37,9 @@
       </section>
       <section>
         <h2>a.k.a. Whack-a-mole!</h2><img src="images/whackamole.jpg">
-        <ul class="left-align fa-ul">
-          <li></li>
-          <li class="list-oomph smell"><i class="fa-li fa fa-frown-o fa-lg"></i>Fix a bug, introduce another...</li>
-        </ul>
       </section>
       <section>
         <h2>Document Specs</h2>
-        <h3>The only documentation that is kept up to date</h3>
         <pre class="hack-height-2"><code class="language-javascript">describe('Password Validator', function() {
   it('Rejects short passwords', function() {
     var password = 'foo';
@@ -56,8 +51,11 @@
     var result = passwordValidator.isValid(password);
     expect(result).to.be(true);
   });
-});
-</code></pre>
+});</code></pre>
+        <ul class="left-align fa-ul">
+          <li></li>
+          <li class="list-oomph"><i class="fa-li fa fa-file-word-o"></i>The only documentation that is kept up to date</li>
+        </ul>
       </section>
       <section>
         <h2>Refactor with Confidence</h2><img src="images/confidence.png" width="370" height="400">
@@ -89,31 +87,33 @@
         <h2 class="big-heading">What are the units?</h2>
         <pre><code class="language-javascript">$('button').click(function() {
   var query = $('input').text();
-  // Validation rule: only search if we have a query of at least two chars
   if (query && query.length >= 2) {
     $.ajax(
         url: 'http://content.guardianapis.com/search?show-fields=all&q=' + query,
         success: function(data) {
           var items = data.response.results;
           for (i = 0; i < items; i++) {
-            // Business rule: only show news items that have pictures
-            if (item.fields.thumbnail) {
-              // sentiment is a global!
-              sentimentResult = sentiment.analyze(item.fields.trailText);
-              $('table').append('&lt;tr&gt;')
-              $('table').append('&lt;td&gt;' + item.fields.byline + '&lt;/tr&gt;')  // author
-              $('table').append('&lt;td&gt;' + item.fields.trailText + '&lt;/tr&gt;')  // content
-              $('table').append('&lt;td&gt;' + item.fields.thumbnail + '&lt;/tr&gt;')  // thumbnail
-              $('table').append('&lt;td&gt;' + item.fields.webUrl + '&lt;/tr&gt;')  // url
-              $('table').append('&lt;td&gt;' + item.fields.webTitle + '&lt;/tr&gt;')  // title
-              $('table').append('&lt;td&gt;' + item.fields.webPublicationDate + '&lt;/tr&gt;')  // publishDate
-              $('table').append('&lt;td&gt;' + sentimentResult + '&lt;/tr&gt;')  // sentiment analysis
-              $('table').append('&lt;/tr&gt;')
-            }
+            sentimentResult = sentiment.analyze(item.fields.trailText);
+            $('table').append('&lt;tr&gt;')
+            $('table').append('&lt;td&gt;' +
+              item.fields.byline + '&lt;/tr&gt;');  //author
+            $('table').append('&lt;td&gt;' +
+              item.fields.trailText + '&lt;/tr&gt;');  //content
+            $('table').append('&lt;td&gt;' +
+              item.fields.thumbnail + '&lt;/tr&gt;');  //thumbnail
+            $('table').append('&lt;td&gt;' +
+              item.fields.webUrl + '&lt;/tr&gt;');  //url
+            $('table').append('&lt;td&gt;' +
+              item.fields.webTitle + '&lt;/tr&gt;'); //title
+            $('table').append('&lt;td&gt;' +
+              item.fields.webPublicationDate + '&lt;/tr&gt;');  //publishDate
+            $('table').append('&lt;td&gt;' +
+              sentimentResult + '&lt;/tr&gt;');  //sentiment analysis
+            $('table').append('&lt;/tr&gt;')
           }
     }, error: function(jqXHR, textStatus, errorThrown) {
-      $('.errorBox').text(textStatus + ', ' + errorThrown);
-      $('.errorBox').show();
+      $('.error').text(textStatus + ', ' + errorThrown);
+      $('.error').show();
     });
   }
 });
@@ -137,14 +137,25 @@ define(['jquery', 'sentiment'], function($, sentiment) {
       </section>
       <section>
         <h2>Stack for BDD Style Testing</h2>
+        <h3>and Java comparisons</h3>
         <ul class="left-align">
           <li></li>
           <li><a href="http://visionmedia.github.io/mocha/">Mocha test framework</a> describe... it...</li>
+          <li class="triangle">JUnit @Test, @Before, @After</li>
           <li><a href="http://chaijs.com/api/bdd/">Chai Assertion Library</a> expect... to...</li>
+          <li class="triangle">JUnit assertTrue, assertEquals</li>
           <li><a href="http://sinonjs.org/docs/">Sinon.JS</a> spies, stubs, and mocks</li>
-          <li><a href="http://karma-runner.github.io/0.12/intro/how-it-works.html">Karma Runner</a> Multiple browsers, reporters</li>
-          <li><a href="https://github.com/karma-runner/grunt-karma">Grunt</a> Run automation, local and CI</li>
+          <li class="triangle">JMock, Mockito, Hamcrest Matchers</li>
           <li><a href="http://jasmine.github.io/1.3/introduction.html">Jasmine</a> is an alternative that can be used in place of Mocha, Chai and Sinon</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Stack for BDD Style Testing</h2>
+        <ul class="left-align">
+          <li><a href="http://karma-runner.github.io/0.12/intro/how-it-works.html">Karma Runner</a> Multiple browsers, reporters</li>
+          <li class="triangle">No exact Java equivalent, sort of like org.junit.runner or using Maven to run tests</li>
+          <li><a href="https://github.com/karma-runner/grunt-karma">Grunt</a> Command line task runner</li>
+          <li class="triangle">Like Ant or Make</li>
         </ul>
       </section>
       <section>

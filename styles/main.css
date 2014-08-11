@@ -2002,3 +2002,14 @@ blockquote {
   -webkit-border-radius: 2px;
   border-radius: 2px;
 }
+li.triangle:before {
+  content: "";
+  display: inline-block;
+  height: 0;
+  width: 0;
+  border-color: transparent #4f4d63;
+  border-style: solid;
+  border-width: 14px 0 14px 16px;
+  margin-right: 0.5em;
+  margin-left: 0.5em;
+}
