@@ -57,15 +57,9 @@ html
         h2 a.k.a. Whack-a-mole!
         //- h3 Fix a bug, introduce another...
         img(src="images/whackamole.jpg")
-        ul.left-align.fa-ul
-          li
-          li.list-oomph.smell
-              i.fa-li.fa.fa-frown-o.fa-lg
-              | Fix a bug, introduce another...
 
       section
         h2 Document Specs
-        h3 The only documentation that is kept up to date
         pre.hack-height-2
           code.language-javascript.
             describe('Password Validator', function() {
@@ -80,6 +74,11 @@ html
                 expect(result).to.be(true);
               });
             });
+        ul.left-align.fa-ul
+          li
+          li.list-oomph
+              i.fa-li.fa.fa-file-word-o
+              | The only documentation that is kept up to date
 
       section
         h2 Refactor with Confidence
@@ -127,31 +126,33 @@ html
           code.language-javascript.
             $('button').click(function() {
               var query = $('input').text();
-              // Validation rule: only search if we have a query of at least two chars
               if (query && query.length >= 2) {
                 $.ajax(
                     url: 'http://content.guardianapis.com/search?show-fields=all&q=' + query,
                     success: function(data) {
                       var items = data.response.results;
                       for (i = 0; i < items; i++) {
-                        // Business rule: only show news items that have pictures
-                        if (item.fields.thumbnail) {
-                          // sentiment is a global!
-                          sentimentResult = sentiment.analyze(item.fields.trailText);
-                          $('table').append('&lt;tr&gt;')
-                          $('table').append('&lt;td&gt;' + item.fields.byline + '&lt;/tr&gt;')  // author
-                          $('table').append('&lt;td&gt;' + item.fields.trailText + '&lt;/tr&gt;')  // content
-                          $('table').append('&lt;td&gt;' + item.fields.thumbnail + '&lt;/tr&gt;')  // thumbnail
-                          $('table').append('&lt;td&gt;' + item.fields.webUrl + '&lt;/tr&gt;')  // url
-                          $('table').append('&lt;td&gt;' + item.fields.webTitle + '&lt;/tr&gt;')  // title
-                          $('table').append('&lt;td&gt;' + item.fields.webPublicationDate + '&lt;/tr&gt;')  // publishDate
-                          $('table').append('&lt;td&gt;' + sentimentResult + '&lt;/tr&gt;')  // sentiment analysis
-                          $('table').append('&lt;/tr&gt;')
-                        }
+                        sentimentResult = sentiment.analyze(item.fields.trailText);
+                        $('table').append('&lt;tr&gt;')
+                        $('table').append('&lt;td&gt;' +
+                          item.fields.byline + '&lt;/tr&gt;');  //author
+                        $('table').append('&lt;td&gt;' +
+                          item.fields.trailText + '&lt;/tr&gt;');  //content
+                        $('table').append('&lt;td&gt;' +
+                          item.fields.thumbnail + '&lt;/tr&gt;');  //thumbnail
+                        $('table').append('&lt;td&gt;' +
+                          item.fields.webUrl + '&lt;/tr&gt;');  //url
+                        $('table').append('&lt;td&gt;' +
+                          item.fields.webTitle + '&lt;/tr&gt;'); //title
+                        $('table').append('&lt;td&gt;' +
+                          item.fields.webPublicationDate + '&lt;/tr&gt;');  //publishDate
+                        $('table').append('&lt;td&gt;' +
+                          sentimentResult + '&lt;/tr&gt;');  //sentiment analysis
+                        $('table').append('&lt;/tr&gt;')
                       }
                 }, error: function(jqXHR, textStatus, errorThrown) {
-                  $('.errorBox').text(textStatus + ', ' + errorThrown);
-                  $('.errorBox').show();
+                  $('.error').text(textStatus + ', ' + errorThrown);
+                  $('.error').show();
                 });
               }
             });
@@ -179,26 +180,36 @@ html
 
       section
         h2 Stack for BDD Style Testing
+        h3 and Java comparisons
         ul.left-align
           li
           li
             a(href="http://visionmedia.github.io/mocha/") Mocha test framework
             |  describe... it...
+          li.triangle JUnit @Test, @Before, @After
           li
             a(href="http://chaijs.com/api/bdd/") Chai Assertion Library
             |  expect... to...
+          li.triangle JUnit assertTrue, assertEquals
           li
             a(href="http://sinonjs.org/docs/") Sinon.JS
             |  spies, stubs, and mocks
-          li
-            a(href="http://karma-runner.github.io/0.12/intro/how-it-works.html") Karma Runner
-            |  Multiple browsers, reporters
-          li
-            a(href="https://github.com/karma-runner/grunt-karma") Grunt
-            |  Run automation, local and CI
+          li.triangle JMock, Mockito, Hamcrest Matchers
           li
             a(href="http://jasmine.github.io/1.3/introduction.html") Jasmine
             |  is an alternative that can be used in place of Mocha, Chai and Sinon
+
+      section
+        h2 Stack for BDD Style Testing
+        ul.left-align
+          li
+            a(href="http://karma-runner.github.io/0.12/intro/how-it-works.html") Karma Runner
+            |  Multiple browsers, reporters
+          li.triangle No exact Java equivalent, sort of like org.junit.runner or using Maven to run tests
+          li
+            a(href="https://github.com/karma-runner/grunt-karma") Grunt
+            |  Command line task runner
+          li.triangle Like Ant or Make
 
       section
         h2 DEMO News Application
