@@ -314,6 +314,56 @@ html
           li
             img(src="images/ci.png" width="500" height="350")
 
+      section
+        h2 Continuous Integration
+        ul.left-align
+          li.list-oomph Specify command line to run tests
+          li.list-oomph Run tests in headless mode
+          li.list-oomph Use PhantomJS
+          li
+            img.float-right(src="images/ghost.png" width="100" height="100")
+
+      section
+        h2 Continuous Integration
+        pre
+          code.language-javascript.
+            // Gruntfile.js
+            karma: {
+              ci: {
+                configFile: 'karma.conf.js',
+                singleRun: true,
+                browsers: ['PhantomJS']
+              }
+            }
+            grunt.registerTask('test', ['karma:ci']);
+        pre
+          code.language-javascript.
+            // package.json
+            "scripts": {
+              "test": "grunt test"
+            }
+
+      section
+        h2 Continuous Integration
+        h3 Configuration for
+          a(href="http://docs.travis-ci.com/user/getting-started/")  Travis CI
+        pre
+          code.language-javascript.
+            // .travis.yml
+            language: node_js
+            node_js:
+              - '0.10'
+            before_install:
+              - npm install -g grunt-cli
+              - npm install -g bower
+            install:
+              - npm install
+              - bower install
+        ul.left-align
+          li
+            a(href="https://travis-ci.org/danielabar/learn-js-test/builds/31809623") Sample output
+
+
       section(data-bespoke-state='emphatic')
         img.img-border(src="images/banner_qa.jpg")
 
