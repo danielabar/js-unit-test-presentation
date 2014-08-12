@@ -229,6 +229,49 @@ define(['jquery', 'sentiment'], function($, sentiment) {
           <li><img src="images/ci.png" width="500" height="350"></li>
         </ul>
       </section>
+      <section>
+        <h2>Continuous Integration</h2>
+        <ul class="left-align">
+          <li class="list-oomph">Specify command line to run tests</li>
+          <li class="list-oomph">Run tests in headless mode</li>
+          <li class="list-oomph">Use PhantomJS</li>
+          <li><img src="images/ghost.png" width="100" height="100" class="float-right"></li>
+        </ul>
+      </section>
+      <section>
+        <h2>Continuous Integration</h2>
+        <pre><code class="language-javascript">// Gruntfile.js
+karma: {
+  ci: {
+    configFile: 'karma.conf.js',
+    singleRun: true,
+    browsers: ['PhantomJS']
+  }
+}
+grunt.registerTask('test', ['karma:ci']);</code></pre>
+        <pre><code class="language-javascript">// package.json
+"scripts": {
+  "test": "grunt test"
+}
+</code></pre>
+      </section>
+      <section>
+        <h2>Continuous Integration</h2>
+        <h3>Configuration for<a href="http://docs.travis-ci.com/user/getting-started/"> Travis CI</a></h3>
+        <pre><code class="language-javascript">// .travis.yml
+language: node_js
+node_js:
+  - '0.10'
+before_install:
+  - npm install -g grunt-cli
+  - npm install -g bower
+install:
+  - npm install
+  - bower install</code></pre>
+        <ul class="left-align">
+          <li><a href="https://travis-ci.org/danielabar/learn-js-test/builds/31809623">Sample output</a></li>
+        </ul>
+      </section>
       <section data-bespoke-state="emphatic"><img src="images/banner_qa.jpg" class="img-border"></section>
     </article>
     <script src="scripts/scripts.js"></script>
