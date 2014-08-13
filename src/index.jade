@@ -55,8 +55,13 @@ html
 
       section
         h2 a.k.a. Whack-a-mole!
-        //- h3 Fix a bug, introduce another...
         img(src="images/whackamole.jpg")
+        ul.left-align.fa-ul
+          li
+          li.list-oomph.smell
+              i.fa-li.fa.fa-frown-o.fa-lg
+              | Fix a bug, introduce another...
+
 
       section
         h2 Document Specs
@@ -263,7 +268,7 @@ html
               | Use sinon to mock and replace function - resolve or reject
           li.list-oomph
               i.fa-li.fa.fa-arrow-circle-right.fa-lg
-              | Call Mocha's done() method to signify end of test
+              | Call done() to let Mocha know it should wait for completion
 
       section
         h2
@@ -285,19 +290,17 @@ html
         h2 Karma Features
         ul.left-align
           li
-          li Capture multiple browsers
+          li.list-oomph Capture multiple browsers
             img(src="images/Chrome.png" width="30" height="30")
             img(src="images/Firefox.png" width="30" height="30")
             img(src="images/Safari.png" width="30" height="30")
             img(src="images/Opera.png" width="30" height="30")
             img(src="images/IE.png" width="30" height="30")
-          li Test from other devices
+          li.list-oomph Test from other devices
             i.fa.fa-mobile.icon-padding
             i.fa.fa-tablet.icon-padding
-          li
-            a(href="http://karma-runner.github.io/0.8/config/coverage.html") Coverage reporter
-          li
-            a(href="https://www.npmjs.org/search?q=karma") Many other plugins available
+          li.list-oomph Coverage reporter
+          li.list-oomph Many other plugins available
 
       section
         h2 Continuous Integration
